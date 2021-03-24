@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios'
+import { Switch, Route } from 'react-router-dom';
+
+import Header from './components/header';
+import LandingPage from './pages/landing';
+import matchPage from './pages/match';
+import PlayerPage from './pages/player';
+import TeamPage from './pages/team';
 
 function App() {
+  //const [data, setData] = useState();
+
+  // useEffect(() => {
+  //   const getAllData = async() => {
+  //     const response = await axios.get('http://localhost:9000/api/getAllData')
+  //     const data = response.data;
+  //     setData(data);
+  //   }
+
+  // }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+        {/* <GlobalStyles /> */}
+        <Header />
+        <Switch>
+          <Route exact path='/' component={LandingPage} />
+          <Route path='/match' component={matchPage} />
+          <Route path='/player' component={PlayerPage} />
+          <Route path='/team' component={TeamPage} />
+        </Switch>
+      </div>
   );
 }
 
