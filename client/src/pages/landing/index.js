@@ -3,15 +3,7 @@ import TableOfResults from '../../components/table';
 import {Button, Container} from 'reactstrap'
 import axios from 'axios';
 
-const LandingPage = ({searchResult}) => {
-  const [data, setData] = useState();
-  
-  const handleClick = async(e) => {
-    const apiQuery = e.target.name;
-    const result = await axios.get(`http://localhost:9000/api/${apiQuery}`)
-    setData(result.data)
-  }
-  console.log(data)
+const LandingPage = ({searchResult, handleClick, tableData}) => {
 
   return (
   <Container className="pt-4">
@@ -29,7 +21,7 @@ const LandingPage = ({searchResult}) => {
       onClick={handleClick}
       name='getTeamData'>Get all Teams
     </Button>
-    <TableOfResults searchResult={searchResult} tableData={data}/>
+    <TableOfResults searchResult={searchResult} tableData={tableData}/>
   </Container>
   )
 }

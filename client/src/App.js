@@ -4,22 +4,15 @@ import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/header'
 import LandingPage from './pages/landing';
-import matchPage from './pages/match';
+import MatchPage from './pages/match';
 import PlayerPage from './pages/player';
 import TeamPage from './pages/team';
 
-function App() {
-  // const [data, setData] = useState();
+const App = () => {
+  const [tableData, setTableData] = useState(); console.log(tableData);
   const [formData, setFormData] = useState({search: ''});
   const [searchResult, setSearchResult] = useState();
-  // useEffect(() => {
-  //   const getAllData = async() => {
-  //     const response = await axios.get('http://localhost:9000/api/getAllData')
-  //     const data = response.data;
-  //     setData(data);
-  //   }
 
-  // }, [])
 
   const handleSubmit = async(event) => {
     event.preventDefault();
@@ -30,8 +23,13 @@ function App() {
 
   const handleChange = (event) => {
     const { value, name } = event.target;
-
     setFormData({ ...formData, [name]: value })
+  }
+
+  const handleClick = async(e) => {
+    const apiQuery = e.target.name;
+    const result = await axios.get(`http://localhost:9000/api/${apiQuery}`)
+    setTableData(result.data)
   }
 
   return (
@@ -39,10 +37,11 @@ function App() {
         {/* <GlobalStyles /> */}
         <Header formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
         <Switch>
-          <Route exact path='/'  render={props => (<LandingPage {...props} searchResult={searchResult}/>)}/>
-          <Route path='/match' component={matchPage} />
-          <Route path='/player' component={PlayerPage} />
-          <Route path='/team' component={TeamPage} />
+          <Route exact path='/'  render={props => (<LandingPage {...props} searchResult={searchResult} handleClick={handleClick} tableData={tableData} />)}/>
+          {/* <Route path='/match' render={props => (<MatchPage {...props} />)} />
+          <Route path='/player' render={props => (<PlayerPage {...props} />)} />
+          <Route path='/team' render={props => (<TeamPage {...props} />)} /> */}
+          <Route path="/match/:id" component={MatchPage} />
         </Switch>
       </div>
   );

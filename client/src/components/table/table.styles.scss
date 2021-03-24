@@ -1,4 +1,6 @@
-.link {
-  color:#007bff;
+.clickable {
   cursor: pointer;
+  :hover {
+    transform: scale(1.1);
+  }
 }
