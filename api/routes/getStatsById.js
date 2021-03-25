@@ -5,6 +5,7 @@ const statData = require('../public/stat-data.json')
 router.post('/', function(req, res, next) {
   const id = parseInt(req.body.id);
 
+  //filter statsData to return objects containing id
   const data = (id) => {
     return statData.filter(obj => Object.values(obj).includes(id))
   }
@@ -16,7 +17,8 @@ router.post('/', function(req, res, next) {
   let interceptions = 0;
   let completed_passes = 0;
   let pressures = 0;
-    
+  
+  //total the goals etc across all returned objects
   data(id).forEach(obj => {
     shots += obj.shots;
     tackles += obj.tackles;
@@ -27,6 +29,7 @@ router.post('/', function(req, res, next) {
     pressures += obj.pressures
   })
   
+  //map data for various charts
   const barData = [
     {
       "stats": "shots/goals",
@@ -69,70 +72,7 @@ router.post('/', function(req, res, next) {
     }
   ]
 
-  // const lineData = [
-  //   {
-  //     "id": id,
-  //     "color": "hsl(37, 70%, 50%)",
-  //     "data": [
-  //       {
-  //         "x": "0",
-  //         "y": 73
-  //       },
-  //       {
-  //         "x": "100",
-  //         "y": 248
-  //       },
-  //       {
-  //         "x": "200",
-  //         "y": 89
-  //       },
-  //       {
-  //         "x": "300",
-  //         "y": 158
-  //       },
-  //       {
-  //         "x": "400",
-  //         "y": 271
-  //       },
-  //       {
-  //         "x": "500",
-  //         "y": 202
-  //       },
-  //       {
-  //         "x": "600",
-  //         "y": 78
-  //       },
-  //       {
-  //         "x": "700",
-  //         "y": 292
-  //       },
-  //       {
-  //         "x": "800",
-  //         "y": 39
-  //       },
-  //       {
-  //         "x": "900",
-  //         "y": 227
-  //       },
-  //       {
-  //         "x": "1000",
-  //         "y": 264
-  //       },
-  //       {
-  //         "x": "1100",
-  //         "y": 24
-  //       }
-  //     ]
-  //   }
-  // ]
-
-  //goals per match
-  //each data point is a match
-  //order matches by date
-  //map matches into data points
-  //no of goals for that match += goals from last data point
-
- 
+  //combine data into one object to return
   const combinedData = {barData, pieData1, pieData2}
 
   res.json(combinedData);

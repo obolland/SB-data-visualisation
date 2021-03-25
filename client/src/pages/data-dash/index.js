@@ -13,7 +13,7 @@ const DashboardPage = ({match, pageName}) => {
   const [statData, setStatData] = useState();
   const [playerNames, setPlayerNames] = useState([]);
   const {id} = match.params;
-  const pageTitle = pageName.replace(/get|Data/gi, '');
+  const pageTitle = pageName && pageName.replace(/get|Data/gi, '');
 
   useEffect(() => {
     const getStatsAsync = async () => {
