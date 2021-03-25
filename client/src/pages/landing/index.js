@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import TableOfResults from '../../components/table';
 import {Button, Container} from 'reactstrap'
-import axios from 'axios';
 
 const LandingPage = ({searchResult, handleClick, tableData}) => {
 
@@ -10,16 +9,16 @@ const LandingPage = ({searchResult, handleClick, tableData}) => {
     <Button
       onClick={handleClick}
       className="mr-1"
-      name='getMatchData'>Get all Matches
+      name='getMatchData'>Get Matches
     </Button>
     <Button
       onClick={handleClick}
       className="mr-1"
-      name='getPlayerData'>Get all Players
+      name='getPlayerData'>Get Players
     </Button>
     <Button
       onClick={handleClick}
-      name='getTeamData'>Get all Teams
+      name='getTeamData'>Get Teams
     </Button>
     <TableOfResults searchResult={searchResult} tableData={tableData}/>
   </Container>

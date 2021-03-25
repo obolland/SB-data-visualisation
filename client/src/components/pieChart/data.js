@@ -1,11 +1,13 @@
 const data = [
   {
     "id": "Passes",
-    "value": 388
+    "value": 388,
+    "color": "hsl(322, 70%, 50%)"
   },
   {
     "id": "Completed Passes",
-    "value": 158
+    "value": 158,
+    "color": "hsl(93, 70%, 50%)"
   }
 ]
 

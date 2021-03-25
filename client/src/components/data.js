@@ -1,24 +1,21 @@
 const data =
 [
   {
-    "stats": "shots",
-    "number of": 1,
+    "stats": "shots/goals",
+    "Shots": 2,
+    "Goals": 1,
   },
   {
     "stats": "tackles",
-    "number of": 9,
-  },
-  {
-    "stats": "goals",
-    "number of": 2,
+    "Tackles": 9,
   },
   {
     "stats": "interceptions",
-    "number of": 3,
+    "Interceptions": 3,
   },
   {
     "stats": "pressures",
-    "number of": 4,
+    "Pressures": 4,
   }
 ]
 

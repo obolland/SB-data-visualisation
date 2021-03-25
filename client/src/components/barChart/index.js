@@ -5,7 +5,7 @@ const BarChart = ({data}) => {
   return (
     <ResponsiveBar
         data={data}
-        keys={[ 'number of']}
+        keys={[ 'Shots', 'Goals', 'Tackles', 'Interceptions', 'Pressures']}
         indexBy="stats"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}

@@ -4,14 +4,13 @@ import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/header'
 import LandingPage from './pages/landing';
-import MatchPage from './pages/match';
-import PlayerPage from './pages/player';
-import TeamPage from './pages/team';
+import DashboardPage from './pages/data-dash';
 
 const App = () => {
   const [tableData, setTableData] = useState(); console.log(tableData);
   const [formData, setFormData] = useState({search: ''});
   const [searchResult, setSearchResult] = useState();
+  const [buttonName, setButtonName] = useState();
 
 
   const handleSubmit = async(event) => {
@@ -28,6 +27,8 @@ const App = () => {
 
   const handleClick = async(e) => {
     const apiQuery = e.target.name;
+    console.log(apiQuery)
+    setButtonName(apiQuery);
     const result = await axios.get(`http://localhost:9000/api/${apiQuery}`)
     setTableData(result.data)
   }
@@ -38,9 +39,9 @@ const App = () => {
         <Header formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
         <Switch>
           <Route exact path='/'  render={props => (<LandingPage {...props} searchResult={searchResult} handleClick={handleClick} tableData={tableData} />)}/>
-          <Route path="/match/:id" component={MatchPage} />
-          <Route path="/team/:id" component={TeamPage} />
-          <Route path="/player/:id" component={PlayerPage} />
+          <Route path="/match/:id" render={props => (<DashboardPage {...props} pageName={buttonName} />)}/>
+          <Route path="/team/:id" render={props => (<DashboardPage {...props} pageName={buttonName} />)} />
+          <Route path="/player/:id" render={props => (<DashboardPage {...props} pageName={buttonName} />)} />
         </Switch>
       </div>
   );
