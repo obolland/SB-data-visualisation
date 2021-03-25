@@ -11,16 +11,16 @@ const LandingPage = ({searchResult, handleClick, tableData}) => {
       <Button
         onClick={handleClick}
         className="mr-1"
-        name='getMatchData'>Get Matches
+        name='getMatchData'>Matches
       </Button>
       <Button
         onClick={handleClick}
         className="mr-1"
-        name='getPlayerData'>Get Players
+        name='getTeamData'>Teams
       </Button>
       <Button
         onClick={handleClick}
-        name='getTeamData'>Get Teams
+        name='getPlayerData'>Players
       </Button>
       </div>
       <TableOfResults searchResult={searchResult} tableData={tableData}/>

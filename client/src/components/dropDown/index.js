@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-const DropFilter = ({playerNames}) => {
+const DropFilter = ({ playerNames, handleFilterClick }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  console.log(playerNames)
   const toggle = () => setDropdownOpen(prevState => !prevState);
+
+  // const handleFilterClick = (e) => {
+  //   const {name} = e.target
+  //   console.log(name)
+  // }
+
+  // const populateCharts = async (name) => {
+  //   const res = await axios.post('http://localhost:9000/api/', {name: name, id: id})
+  // }
+
 
   return (
     <Dropdown isOpen={dropdownOpen} size="lg" toggle={toggle}>
@@ -13,10 +22,13 @@ const DropFilter = ({playerNames}) => {
       </DropdownToggle>
       <DropdownMenu>
         <DropdownItem header>Select Player</DropdownItem>
-        { playerNames.map(name => 
-          <DropdownItem key={name}>{name}</DropdownItem>
-        )
-        }
+          { playerNames.map(name => 
+            <DropdownItem
+              key={name}
+              name={name} 
+              onClick={handleFilterClick}>{name}
+            </DropdownItem>
+          )}
       </DropdownMenu>
     </Dropdown>
   );

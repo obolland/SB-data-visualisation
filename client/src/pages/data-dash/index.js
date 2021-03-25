@@ -31,10 +31,24 @@ const DashboardPage = ({match, pageName}) => {
     }; getNamesAsync()
   }, [id])
 
+  const handleFilterClick = (e) => {
+    const {name} = e.target
+    filterChartsByPlayer(name)
+  }
+
+  const filterChartsByPlayer = async (name) => {
+    const res = await axios.post('http://localhost:9000/api/getMatchPlayerAndId', {name: name, id: id})
+    setStatData({
+      barData: res.data.barData,
+      pieData1: res.data.pieData1,
+      pieData2: res.data.pieData2
+    })
+  }
+
 
   return (
     <>
-      <Header playerNames={playerNames}/>
+      <Header playerNames={playerNames} handleFilterClick={handleFilterClick} />
         <Container className='text-center'>
           { statData &&
             <>

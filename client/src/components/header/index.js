@@ -10,7 +10,7 @@ import {
   NavLink
 } from 'reactstrap';
 
-const Header = ({playerNames}) => {
+const Header = ({ playerNames, handleFilterClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -26,7 +26,7 @@ const Header = ({playerNames}) => {
               <NavLink href="/about/">About</NavLink>
             </NavItem>
           </Nav>
-          <DropFilter playerNames={playerNames}/>
+          <DropFilter playerNames={playerNames} handleFilterClick={handleFilterClick} />
         </Collapse>
       </Navbar>
     </div>
