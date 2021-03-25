@@ -12,6 +12,7 @@ var getTeamDataRouter = require('./routes/getTeamData');
 var getMatchDataRouter = require('./routes/getMatchData');
 var getStatDataRouter = require('./routes/getStatData');
 var getStatsByIdRouter = require('./routes/getStatsById');
+var getPlayerNamesByIdRouter = require('./routes/getPlayerNamesById');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/api/getTeamData', getTeamDataRouter);
 app.use('/api/getMatchData', getMatchDataRouter);
 app.use('/api/getStatData', getStatDataRouter);
 app.use('/api/getStatsById', getStatsByIdRouter);
+app.use('/api/getPlayerNamesById', getPlayerNamesByIdRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

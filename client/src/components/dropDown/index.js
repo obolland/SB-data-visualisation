@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-const DropFilter = ({players}) => {
+const DropFilter = ({playerNames}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  console.log(playerNames)
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
   return (
@@ -13,9 +13,10 @@ const DropFilter = ({players}) => {
       </DropdownToggle>
       <DropdownMenu>
         <DropdownItem header>Select Player</DropdownItem>
-        <DropdownItem>Foo Action</DropdownItem>
-        <DropdownItem>Bar Action</DropdownItem>
-        <DropdownItem>Quo Action</DropdownItem>
+        { playerNames.map(name => 
+          <DropdownItem key={name}>{name}</DropdownItem>
+        )
+        }
       </DropdownMenu>
     </Dropdown>
   );

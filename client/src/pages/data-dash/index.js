@@ -10,26 +10,31 @@ import LineChart from '../../components/lineChart';
 
 
 const DashboardPage = ({match, pageName}) => {
-  const [statData, setStatData] = useState(); console.log(statData)
+  const [statData, setStatData] = useState();
+  const [playerNames, setPlayerNames] = useState([]);
   const {id} = match.params;
   const pageTitle = pageName.replace(/get|Data/gi, '');
 
   useEffect(() => {
-    const getAsync = async () => {
+    const getStatsAsync = async () => {
       const res = await axios.post('http://localhost:9000/api/getStatsById', {id: id})
       setStatData({
         barData: res.data.barData,
         pieData1: res.data.pieData1,
         pieData2: res.data.pieData2
       })
-    }
-    getAsync()
+    }; getStatsAsync()
+
+    const getNamesAsync = async () => {
+      const resp = await axios.post('http://localhost:9000/api/getPlayerNamesById', {id: id})
+      setPlayerNames(resp.data)
+    }; getNamesAsync()
   }, [id])
 
 
   return (
     <>
-      <Header />
+      <Header playerNames={playerNames}/>
         <Container className='text-center'>
           { statData &&
             <>
