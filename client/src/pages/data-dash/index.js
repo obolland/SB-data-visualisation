@@ -1,47 +1,50 @@
 import React, {useEffect, useState} from 'react';
 import { withRouter } from "react-router";
-import axios from 'axios';
+import Fade from 'react-reveal/Fade';
 import {Container, Row, Col} from 'reactstrap';
 import Header from '../../components/header';
+import {getStats, getNames, matchPlayerWithId} from '../../actions/';
 import BarChart from '../../components/barChart';
 import PieChart from '../../components/pieChart';
 import LineChart from '../../components/lineChart';
 
 
-
-const DashboardPage = ({match, pageName}) => {
+const DashboardPage = ({ match, pageName }) => {
   const [statData, setStatData] = useState();
   const [playerNames, setPlayerNames] = useState([]);
   const {id} = match.params;
   const pageTitle = pageName && pageName.replace(/get|Data/gi, '');
 
   useEffect(() => {
-    const getStatsAsync = async () => {
-      const res = await axios.post('http://localhost:9000/api/getStatsById', {id: id})
+    getStats(id)
+    .then(res => {
       setStatData({
-        barData: res.data.barData,
-        pieData1: res.data.pieData1,
-        pieData2: res.data.pieData2
+        barData: res.barData,
+        pieData1: res.pieData1,
+        pieData2: res.pieData2
       })
-    }; getStatsAsync()
+    })
 
-    const getNamesAsync = async () => {
-      const resp = await axios.post('http://localhost:9000/api/getPlayerNamesById', {id: id})
-      setPlayerNames(resp.data)
-    }; getNamesAsync()
+    getNames(id)
+    .then(res => {
+      setPlayerNames(res)
+    })
   }, [id])
 
+  //handleClick passed to to the player filter button in the dashboard
   const handleFilterClick = (e) => {
     const {name} = e.target
     filterChartsByPlayer(name)
   }
 
   const filterChartsByPlayer = async (name) => {
-    const res = await axios.post('http://localhost:9000/api/getMatchPlayerAndId', {name: name, id: id})
-    setStatData({
-      barData: res.data.barData,
-      pieData1: res.data.pieData1,
-      pieData2: res.data.pieData2
+    matchPlayerWithId(name, id)
+    .then(res => {
+      setStatData({
+        barData: res.barData,
+        pieData1: res.pieData1,
+        pieData2: res.pieData2
+      })
     })
   }
 
@@ -49,6 +52,7 @@ const DashboardPage = ({match, pageName}) => {
   return (
     <>
       <Header playerNames={playerNames} handleFilterClick={handleFilterClick} />
+      <Fade duration={1000} delay={100}>
         <Container className='text-center'>
           { statData &&
             <>
@@ -57,16 +61,21 @@ const DashboardPage = ({match, pageName}) => {
               <div className="mb-4" style={{height: 500}}><BarChart data={statData.barData}/></div>
               <Row>
                 <Col md="6">
-                  <div style={{height: 500}}><PieChart data={statData.pieData1}/></div>
+                  <div style={{height: 500}}>
+                    <PieChart data={statData.pieData1} colour={{scheme: "nivo"}} />
+                  </div>
                 </Col>
                 <Col md="6">
-                  <div style={{height: 500}}><PieChart data={statData.pieData2}/></div>
+                  <div style={{height: 500}}>
+                    <PieChart data={statData.pieData2} colour={{scheme: "category10"}} />
+                  </div>
                 </Col>
               </Row>
               <div style={{height: 500}}><LineChart /></div>
             </>
           }
         </Container>
+      </Fade>
     </>
   )
 }

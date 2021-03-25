@@ -1,6 +1,6 @@
 import { ResponsivePie } from '@nivo/pie'
 
-const PieChart = ({data}) => (
+const PieChart = ({ data, colour }) => (
     <ResponsivePie
         data={data}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -8,7 +8,7 @@ const PieChart = ({data}) => (
         endAngle={225}
         padAngle={2}
         cornerRadius={3}
-        colors={{ scheme: 'nivo' }}
+        colors={colour}
         borderWidth={1}
         borderColor={{ from: 'color', modifiers: [ [ 'darker', '0.5' ] ] }}
         radialLabelsTextColor="#333333"

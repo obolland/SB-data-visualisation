@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
 
-//var getAllDataRouter = require('./routes/getAllData');
+//require routes and assign router variables
 var getMatchDataRouter = require('./routes/getMatchData');
 var getPlayerDataRouter = require('./routes/getPlayerData');
 var getTeamDataRouter = require('./routes/getTeamData');
@@ -28,8 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-//app.use('/api/getAllData', getAllDataRouter);
+//assign routes to router variables
 app.use('/api/getMatchData', getMatchDataRouter);
 app.use('/api/getPlayerData', getPlayerDataRouter);
 app.use('/api/getTeamData', getTeamDataRouter);

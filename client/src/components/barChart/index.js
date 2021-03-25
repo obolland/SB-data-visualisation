@@ -1,5 +1,4 @@
 import { ResponsiveBar } from '@nivo/bar';
-//import data from '../data';
 
 const BarChart = ({data}) => {
   return (

@@ -5,6 +5,7 @@ import './table.styles.scss';
 const ResultsTable = ({ tableData }) => {
   let history = useHistory();
 
+  //create url based on what has been clicked (match, team, player)
   const handleRowClick = (id, key) => {
     const _key = key.toString().charAt(0)
     if (_key === 'm'){

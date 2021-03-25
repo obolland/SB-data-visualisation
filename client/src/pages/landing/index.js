@@ -1,6 +1,7 @@
 import React from 'react';
 import TableOfResults from '../../components/table';
-import {Button, Container} from 'reactstrap'
+import {Button, Container} from 'reactstrap';
+import Fade from 'react-reveal/Fade';
 import './landing.styles.scss';
 
 const LandingPage = ({searchResult, handleClick, tableData}) => {
@@ -22,8 +23,16 @@ const LandingPage = ({searchResult, handleClick, tableData}) => {
         onClick={handleClick}
         name='getPlayerData'>Players
       </Button>
-      </div>
-      <TableOfResults searchResult={searchResult} tableData={tableData}/>
+    </div>
+      {
+        tableData ? 
+          <Fade duration={1000} delay={100}>
+            <TableOfResults searchResult={searchResult} tableData={tableData} />
+          </Fade> :
+          <Fade duration={2500} delay={150}>
+            <h3 className="text-center mt-4 header">Select Matches, Teams or Players to continue...</h3>
+          </Fade>
+      }
   </Container>
   )
 }

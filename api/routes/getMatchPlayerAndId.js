@@ -11,7 +11,6 @@ router.post('/', function(req, res, next) {
   const data = (id) => {
     return statData.filter(obj => Object.values(obj).includes(id))
   };
-  console.log(data(id))
 
   //get id of player from name. We are filtering by this player
   let playerId;
@@ -20,7 +19,6 @@ router.post('/', function(req, res, next) {
       if (obj.player_name == name) playerId = obj.player_id
     })
   };  getPlayersId(name)
-  console.log(playerId);
 
   //return the player stats based on players ID
   let player;
@@ -29,6 +27,7 @@ router.post('/', function(req, res, next) {
       if (obj.player_id == id) player = obj;
     })
   }; getPlayer(playerId)
+
 
   const { shots, tackles, goals, passes, interceptions,
           completed_passes, pressures
@@ -79,9 +78,6 @@ router.post('/', function(req, res, next) {
 
   //combine data into one object to return
   const combinedData = {barData, pieData1, pieData2}
-
-
-
 
   res.json(combinedData);
 });
