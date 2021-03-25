@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios'
 import { Switch, Route } from 'react-router-dom';
 
@@ -38,10 +38,9 @@ const App = () => {
         <Header formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
         <Switch>
           <Route exact path='/'  render={props => (<LandingPage {...props} searchResult={searchResult} handleClick={handleClick} tableData={tableData} />)}/>
-          {/* <Route path='/match' render={props => (<MatchPage {...props} />)} />
-          <Route path='/player' render={props => (<PlayerPage {...props} />)} />
-          <Route path='/team' render={props => (<TeamPage {...props} />)} /> */}
           <Route path="/match/:id" component={MatchPage} />
+          <Route path="/team/:id" component={TeamPage} />
+          <Route path="/player/:id" component={PlayerPage} />
         </Switch>
       </div>
   );

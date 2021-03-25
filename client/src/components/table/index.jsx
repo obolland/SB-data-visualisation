@@ -1,5 +1,4 @@
 import { Table } from 'reactstrap';
-import {Link} from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import './table.styles.scss';
 
@@ -16,8 +15,7 @@ const ResultsTable = ({ tableData }) => {
     }
     if (_key === 't'){
       history.push(`/team/${id}`);
-    }
-    
+    }    
   }
 
   return (
@@ -55,5 +53,3 @@ const ResultsTable = ({ tableData }) => {
 }
 
 export default ResultsTable;
-
-//<Link to={'match/'+Object.values(obj)[0]}>

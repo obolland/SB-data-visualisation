@@ -5,12 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
 
-var getAllDataRouter = require('./routes/getAllData');
+//var getAllDataRouter = require('./routes/getAllData');
 var getMatchDataRouter = require('./routes/getMatchData');
 var getPlayerDataRouter = require('./routes/getPlayerData');
 var getTeamDataRouter = require('./routes/getTeamData');
 var getMatchDataRouter = require('./routes/getMatchData');
 var getStatDataRouter = require('./routes/getStatData');
+var getStatsByIdRouter = require('./routes/getStatsById');
 
 var app = express();
 
@@ -26,12 +27,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/api/getAllData', getAllDataRouter);
+//app.use('/api/getAllData', getAllDataRouter);
 app.use('/api/getMatchData', getMatchDataRouter);
 app.use('/api/getPlayerData', getPlayerDataRouter);
 app.use('/api/getTeamData', getTeamDataRouter);
 app.use('/api/getMatchData', getMatchDataRouter);
 app.use('/api/getStatData', getStatDataRouter);
+app.use('/api/getStatsById', getStatsByIdRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

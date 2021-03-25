@@ -7,28 +7,33 @@ import PieChart from '../../components/pieChart';
 
 
 const MatchPage = (props) => {
-  const [statData, setStatData] = useState();
+  const [statData, setStatData] = useState(); console.log(statData)
   const {id} = props.match.params
 
   useEffect(() => {
     const getAsync = async () => {
-      const response = await axios.post('http://localhost:9000/api/getStatsById', {id: id})
-      setStatData(response.data)
+      const res = await axios.post('http://localhost:9000/api/getStatsById', {id: id})
+      setStatData({barData: res.data.barData, pieData: res.data.pieData})
     }
     getAsync()
   }, [id])
 
+
   return (
     <Container>
-      
-      <Row>
-        <Col md="8">
-        <div style={{height: 500}}><BarChart /></div>
-        </Col>
-        <Col md="4">
-        <div style={{height: 500}}><PieChart /></div>
-        </Col>
-      </Row>
+      { statData &&
+        <>
+          <h1>{props.location.pathname.toString().replace(/[0-9/]/g, '')} statistics</h1>
+          <Row>
+            <Col md="8">
+              <div style={{height: 500}}><BarChart data={statData.barData}/></div>
+            </Col>
+            <Col md="4">
+              <div style={{height: 500}}><PieChart data={statData.pieData}/></div>
+            </Col>
+          </Row>
+        </>
+      }
     </Container>
   )
 }

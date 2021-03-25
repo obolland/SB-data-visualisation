@@ -1,7 +1,6 @@
-import data from './data';
 import { ResponsivePie } from '@nivo/pie'
 
-const PieChart = () => (
+const PieChart = ({data}) => (
     <ResponsivePie
         data={data}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}

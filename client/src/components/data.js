@@ -2,23 +2,23 @@ const data =
 [
   {
     "stats": "shots",
-    "match": 1,
+    "number of": 1,
   },
   {
     "stats": "tackles",
-    "match": 9,
+    "number of": 9,
   },
   {
     "stats": "goals",
-    "match": 2,
+    "number of": 2,
   },
   {
     "stats": "interceptions",
-    "match": 3,
+    "number of": 3,
   },
   {
     "stats": "pressures",
-    "match": 4,
+    "number of": 4,
   }
 ]
 
