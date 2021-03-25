@@ -2,8 +2,11 @@ import React, {useEffect, useState} from 'react';
 import { withRouter } from "react-router";
 import axios from 'axios';
 import {Container, Row, Col} from 'reactstrap';
+import Header from '../../components/header';
 import BarChart from '../../components/barChart';
 import PieChart from '../../components/pieChart';
+import LineChart from '../../components/lineChart';
+
 
 
 const DashboardPage = ({match, pageName}) => {
@@ -25,23 +28,27 @@ const DashboardPage = ({match, pageName}) => {
 
 
   return (
-    <Container className='text-center'>
-      { statData &&
-        <>
-          <h1 className='mt-4'>{pageTitle} Data Dashboard</h1>
-          <h3>{pageTitle} ID - {id}</h3>
-          <div className="mb-4" style={{height: 500}}><BarChart data={statData.barData}/></div>
-          <Row>
-            <Col md="6">
-              <div style={{height: 500}}><PieChart data={statData.pieData1}/></div>
-            </Col>
-            <Col md="6">
-              <div style={{height: 500}}><PieChart data={statData.pieData2}/></div>
-            </Col>
-          </Row>
-        </>
-      }
-    </Container>
+    <>
+      <Header />
+        <Container className='text-center'>
+          { statData &&
+            <>
+              <h1 className='mt-4'>{pageTitle} Data Dashboard</h1>
+              <h3>{pageTitle} ID - {id}</h3>
+              <div className="mb-4" style={{height: 500}}><BarChart data={statData.barData}/></div>
+              <Row>
+                <Col md="6">
+                  <div style={{height: 500}}><PieChart data={statData.pieData1}/></div>
+                </Col>
+                <Col md="6">
+                  <div style={{height: 500}}><PieChart data={statData.pieData2}/></div>
+                </Col>
+              </Row>
+              <div style={{height: 500}}><LineChart /></div>
+            </>
+          }
+        </Container>
+    </>
   )
 }
 

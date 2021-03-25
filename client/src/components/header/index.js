@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import DropFilter from '../../components/dropDown';
 import {
   Collapse,
   Navbar,
@@ -7,17 +7,12 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  NavbarText,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
-  Button,
+  NavLink
 } from 'reactstrap';
 
-const Header = ({ handleSubmit, handleChange, formData }) => {
+const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -31,27 +26,7 @@ const Header = ({ handleSubmit, handleChange, formData }) => {
               <NavLink href="/about/">About</NavLink>
             </NavItem>
           </Nav>
-          <NavbarText>
-            <form onSubmit={handleSubmit}>
-              <InputGroup className="mb-2">
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>Search</InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  placeholder="date of match, team or player..."
-                  name='search'
-                  type='text'
-                  onChange={handleChange}
-                  value={formData.search}
-                  label='email'
-                  id='search'
-                  required
-                  style={{width: 300}}
-                />
-                <Button type="submit" color="primary" className="ml-2 mr-2">GO</Button>
-              </InputGroup>
-            </form>
-          </NavbarText>
+          <DropFilter />
         </Collapse>
       </Navbar>
     </div>

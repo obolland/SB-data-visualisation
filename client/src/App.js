@@ -8,22 +8,7 @@ import DashboardPage from './pages/data-dash';
 
 const App = () => {
   const [tableData, setTableData] = useState(); console.log(tableData);
-  const [formData, setFormData] = useState({search: ''});
-  const [searchResult, setSearchResult] = useState();
   const [buttonName, setButtonName] = useState();
-
-
-  const handleSubmit = async(event) => {
-    event.preventDefault();
-    const response = await axios.post('http://localhost:9000/getSearch', formData)
-    const searchResult = response.data
-    setSearchResult(searchResult);
-  }
-
-  const handleChange = (event) => {
-    const { value, name } = event.target;
-    setFormData({ ...formData, [name]: value })
-  }
 
   const handleClick = async(e) => {
     const apiQuery = e.target.name;
@@ -36,9 +21,9 @@ const App = () => {
   return (
     <div>
         {/* <GlobalStyles /> */}
-        <Header formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
+        {/* <Header /> */}
         <Switch>
-          <Route exact path='/'  render={props => (<LandingPage {...props} searchResult={searchResult} handleClick={handleClick} tableData={tableData} />)}/>
+          <Route exact path='/'  render={props => (<LandingPage {...props} handleClick={handleClick} tableData={tableData} />)}/>
           <Route path="/match/:id" render={props => (<DashboardPage {...props} pageName={buttonName} />)}/>
           <Route path="/team/:id" render={props => (<DashboardPage {...props} pageName={buttonName} />)} />
           <Route path="/player/:id" render={props => (<DashboardPage {...props} pageName={buttonName} />)} />
